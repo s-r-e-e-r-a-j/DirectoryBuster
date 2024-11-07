@@ -1,6 +1,10 @@
 ## Directory Buster
 
 **Directory Buster** is a Python-based directory brute-forcing tool with a user-friendly GUI. It helps discover hidden directories and files on a web server by attempting various directory names from a wordlist.  this tool is easy to set up and operate
+## Tool Graphical User Interface
+
+![Screenshot 2024-11-08 010145](https://github.com/user-attachments/assets/3f052ea9-e517-4278-a82f-6dbfe92ee1fe)
+
 
 ## Features
 - **Simple GUI**: Easy-to-use interface for URL input and wordlist selection.
