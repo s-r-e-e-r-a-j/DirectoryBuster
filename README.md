@@ -44,7 +44,7 @@ pip3 install requests
 python3 directorybuster.py
 ```
 2. Enter the Target URL and choose a Wordlist File (e.g., a .txt file with potential directories)
-3. 
+   
 
 All Wordlists for this tool are available at this path in kali linux `/usr/share/wordlists/dirbuster`
 
