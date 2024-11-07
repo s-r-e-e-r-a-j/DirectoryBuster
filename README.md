@@ -13,7 +13,7 @@
 - **Clickable URLs**: Found URLs can be clicked to open directly in a web browser.
 Stop Functionality: Stop the scan anytime with the stop button.
 - **Hover Effects**: Cursor changes to a pointer on hover over URLs, with highlighted URLs.
-- 
+ 
 ## Requirements
 
 - **Python 3.x**
