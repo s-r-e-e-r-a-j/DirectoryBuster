@@ -13,7 +13,12 @@
 - **Clickable URLs**: Found URLs can be clicked to open directly in a web browser.
 Stop Functionality: Stop the scan anytime with the stop button.
 - **Hover Effects**: Cursor changes to a pointer on hover over URLs, with highlighted URLs.
+- 
+## Requirements
 
+- **Python 3.x**
+- **requests library**
+- 
 ## Installation
 
 1. Clone this repository:
@@ -38,8 +43,10 @@ pip3 install requests
 ```bash
 python3 directorybuster.py
 ```
-2. Enter the Target URL and choose a Wordlist File (e.g., a .txt file with potential directories,All Wordlists for this tool are available at this path in kali linux `/usr/share/wordlists/dirbuster`)
+2. Enter the Target URL and choose a Wordlist File (e.g., a .txt file with potential directories)
+3. 
 
+All Wordlists for this tool are available at this path in kali linux `/usr/share/wordlists/dirbuster`
 
 3. (Optional) To save results, check Save found results to file and select a save location
 
@@ -52,9 +59,6 @@ python3 directorybuster.py
 
 6. View results in the output area. Click any found URL to open it in your default web browser.
 
-## Requirements
-- **Python 3.x**
-- **requests library**
 
   ## License
   MIT Licensed
