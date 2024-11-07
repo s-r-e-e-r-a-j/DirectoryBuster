@@ -18,7 +18,7 @@ Stop Functionality: Stop the scan anytime with the stop button.
 
 - **Python 3.x**
 - **requests library**
-- 
+ 
 ## Installation
 
 1. Clone this repository:
@@ -61,4 +61,7 @@ All Wordlists for this tool are available at this path in kali linux `/usr/share
 
 
   ## License
-  MIT Licensed
+  This project is licensed under the MIT License. See the LICENSE file for details.
+  
+## Credits
+Created by Sreeraj
