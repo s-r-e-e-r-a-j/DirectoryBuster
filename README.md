@@ -55,3 +55,6 @@ python3 directorybuster.py
 ## Requirements
 - **Python 3.x**
 - **requests library**
+
+  ## License
+  MIT Licensed
