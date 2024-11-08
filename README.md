@@ -1,6 +1,13 @@
 ## Directory Buster
 Directory Buster is a simple yet powerful tool for discovering hidden directories and files on a target web server using a wordlist-based approach. It's designed to assist security professionals and enthusiasts with directory brute-forcing to identify potentially vulnerable or hidden resources on a web server.
 
+## Tool Graphical User Interface
+
+![VirtualBox_KALILINUX1_08_11_2024_22_00_28](https://github.com/user-attachments/assets/c7e808b1-ea27-4831-8497-d95e490be0a6)
+
+
+
+
 ## Features:
 - Enter the target URL to start brute-forcing.
 - Choose a wordlist for directory names.
@@ -76,7 +83,7 @@ Click the "Stop" button anytime to halt the directory busting process.
 - Optionally select a save path for the results.
 - Click "Start" and watch the results populate in real-time.
 
-## Screenshot
+## Picture
 
 ![VirtualBox_KALILINUX1_08_11_2024_22_00_28](https://github.com/user-attachments/assets/7f496402-1321-478b-a960-9b17f91bd82a)
 
