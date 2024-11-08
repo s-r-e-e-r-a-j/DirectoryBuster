@@ -1,188 +1,195 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, scrolledtext
 import requests
-from threading import Thread
+import threading
 import webbrowser
 
 class DirectoryBuster:
     def __init__(self, root):
         self.root = root
         self.root.title("Directory Buster")
-        self.root.geometry("650x550")
-        self.root.configure(bg="#f2f2f2")
-        self.root.resizable(False, False)
-        self.stop_flag = False  # To control stopping the process
-
-        # Header Frame
-        header_frame = tk.Frame(root, bg="#f2f2f2")
-        header_frame.pack(pady=10)
-
-        title_label = tk.Label(header_frame, text="Directory Buster", font=("Helvetica", 20, "bold"), fg="#333")
-        title_label.grid(row=0, column=0, padx=10)
-
-        # URL Input Frame
-        url_frame = tk.Frame(root, bg="#f2f2f2")
-        url_frame.pack(pady=10, padx=20, fill="x")
-
-        tk.Label(url_frame, text="Target URL:", font=("Helvetica", 12), bg="#f2f2f2").grid(row=0, column=0, sticky="w")
-        self.url_entry = tk.Entry(url_frame, font=("Helvetica", 12), width=40)
-        self.url_entry.grid(row=0, column=1, padx=10, pady=5)
-
-        # Wordlist File Selection Frame
-        wordlist_frame = tk.Frame(root, bg="#f2f2f2")
-        wordlist_frame.pack(pady=5, padx=20, fill="x")
-
-        tk.Label(wordlist_frame, text="Wordlist File:", font=("Helvetica", 12), bg="#f2f2f2").grid(row=0, column=0, sticky="w")
-        self.wordlist_entry = tk.Entry(wordlist_frame, font=("Helvetica", 12), width=30)
-        self.wordlist_entry.grid(row=0, column=1, padx=10)
         
-        browse_button = tk.Button(wordlist_frame, text="Browse", command=self.browse_file, font=("Helvetica", 10))
-        browse_button.grid(row=0, column=2, padx=10)
+        # Center the window on the screen with adjusted height
+        window_width = 600
+        window_height = 680  # Increased window height to accommodate buttons
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        x = int((screen_width - window_width) / 2)
+        y = int((screen_height - window_height) / 2)
+        self.root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        
+        # Style Variables
+        label_font = ("Helvetica", 12)
+        header_font = ("Helvetica", 18, "bold")
+        subtext_font = ("Helvetica", 10, "italic")
+        
+        # Header
+        header_frame = tk.Frame(self.root)
+        header_frame.pack(pady=10)
+        tk.Label(header_frame, text="Directory Buster", font=header_font).pack()
+        tk.Label(header_frame, text="This tool is made by Sreeraj", font=subtext_font).pack()
+
+        # Frame for Target URL
+        url_frame = tk.Frame(self.root)
+        url_frame.pack(pady=10, fill=tk.X, padx=20)
+        tk.Label(url_frame, text="Target URL:", font=label_font).grid(row=0, column=0, sticky=tk.W)
+        self.url_entry = tk.Entry(url_frame, width=50)
+        self.url_entry.grid(row=0, column=1, padx=5)
+
+        # Frame for Wordlist Selection
+        wordlist_frame = tk.Frame(self.root)
+        wordlist_frame.pack(pady=10, fill=tk.X, padx=20)
+        tk.Label(wordlist_frame, text="Wordlist:", font=label_font).grid(row=0, column=0, sticky=tk.W)
+        self.wordlist_entry = tk.Entry(wordlist_frame, width=40)
+        self.wordlist_entry.grid(row=0, column=1, padx=5)
+        tk.Button(wordlist_frame, text="Browse", command=self.select_wordlist).grid(row=0, column=2, padx=5)
 
         # Save Results Option
-        save_frame = tk.Frame(root, bg="#f2f2f2")
-        save_frame.pack(pady=10, padx=20, fill="x")
-
-        self.save_var = tk.IntVar()
-        self.save_checkbox = tk.Checkbutton(save_frame, text="Save found results to file", variable=self.save_var, command=self.toggle_save_option, font=("Helvetica", 12), bg="#f2f2f2")
-        self.save_checkbox.grid(row=0, column=0, sticky="w")
+        options_frame = tk.Frame(self.root)
+        options_frame.pack(pady=5, fill=tk.X, padx=20)
+        self.save_results = tk.BooleanVar()
+        tk.Checkbutton(options_frame, text="Save found results", variable=self.save_results, font=label_font, command=self.toggle_save_path).grid(row=0, column=0, sticky=tk.W)
         
-        self.save_path_entry = tk.Entry(save_frame, font=("Helvetica", 12), width=30, state="disabled")
-        self.save_path_entry.grid(row=0, column=1, padx=10)
-        self.save_browse_button = tk.Button(save_frame, text="Select File", command=self.select_save_file, font=("Helvetica", 10), state="disabled")
-        self.save_browse_button.grid(row=0, column=2, padx=10)
+        # File Path Entry for Saving Results
+        save_path_frame = tk.Frame(self.root)
+        save_path_frame.pack(pady=5, fill=tk.X, padx=20)
+        self.save_path_entry = tk.Entry(save_path_frame, width=40, state=tk.DISABLED)
+        self.save_path_entry.grid(row=0, column=0, padx=5)
+        self.save_file_button = tk.Button(save_path_frame, text="Select Save File", command=self.select_save_path, state=tk.DISABLED)
+        self.save_file_button.grid(row=0, column=1, padx=5)
 
-        # Results Text Box with Scrollbar
-        results_frame = tk.Frame(root, bg="#f2f2f2")
-        results_frame.pack(pady=10, padx=20, fill="both", expand=True)
+        # Displaying All Results
+        results_label = tk.Label(self.root, text="All Results:", font=label_font)
+        results_label.pack(pady=(10, 0))
+        self.all_results_text = scrolledtext.ScrolledText(self.root, wrap=tk.WORD, height=10, width=70)
+        self.all_results_text.pack(pady=(0, 10), padx=20)
 
-        scrollbar = tk.Scrollbar(results_frame)
-        scrollbar.pack(side="right", fill="y")
+        # Displaying Found Results
+        found_results_label = tk.Label(self.root, text="Found Results (click URL to open in browser):", font=label_font)
+        found_results_label.pack(pady=(10, 0))
+        self.found_results_text = scrolledtext.ScrolledText(self.root, wrap=tk.WORD, height=5, width=70)
+        self.found_results_text.pack(pady=(0, 10), padx=20)
+        self.found_results_text.config(cursor="hand2")
+        self.found_results_text.bind("<Button-1>", self.open_in_browser)
 
-        self.results_text = tk.Text(results_frame, height=10, width=70, state="disabled", font=("Helvetica", 10), yscrollcommand=scrollbar.set)
-        self.results_text.pack(padx=10, pady=10, fill="both", expand=True)
-        scrollbar.config(command=self.results_text.yview)
+        # Start and Stop Buttons
+        buttons_frame = tk.Frame(self.root)
+        buttons_frame.pack(pady=20)
 
-        # Configure tag for URLs
-        self.results_text.tag_configure("url", foreground="blue", underline=True)
-        self.results_text.tag_bind("url", "<Enter>", self.on_enter_url)
-        self.results_text.tag_bind("url", "<Leave>", self.on_leave_url)
-        self.results_text.tag_bind("url", "<Button-1>", self.open_url)  # Make URLs clickable
+        # Adjusting button size and layout
+        self.start_button = tk.Button(buttons_frame, text="Start", command=self.start_busting, bg="green", fg="white", width=15, height=2)
+        self.start_button.grid(row=0, column=0, padx=20)
 
-        # Control Buttons (Start and Stop)
-        button_frame = tk.Frame(root, bg="#f2f2f2")
-        button_frame.pack(pady=15)
+        self.stop_button = tk.Button(buttons_frame, text="Stop", command=self.stop_busting, state=tk.DISABLED, bg="red", fg="white", width=15, height=2)
+        self.stop_button.grid(row=0, column=1, padx=20)
 
-        start_button = tk.Button(button_frame, text="Start Directory Buster", font=("Helvetica", 14, "bold"), command=self.start_busting, bg="#4CAF50", fg="white")
-        start_button.grid(row=0, column=0, padx=10)
+        # Thread management variables
+        self.is_busting = False
+        self.thread = None
 
-        stop_button = tk.Button(button_frame, text="Stop", font=("Helvetica", 14, "bold"), command=self.stop_busting, bg="#FF5733", fg="white")
-        stop_button.grid(row=0, column=1, padx=10)
+    def select_wordlist(self):
+        filepath = filedialog.askopenfilename(title="Select Wordlist", filetypes=[("Text files", "*.txt")])
+        if filepath:
+            self.wordlist_entry.delete(0, tk.END)
+            self.wordlist_entry.insert(0, filepath)
 
-        # Footer with Copyright Notice
-        footer_frame = tk.Frame(root, bg="#f2f2f2")
-        footer_frame.pack(side="bottom", pady=10)
-
-        copyright_label = tk.Label(footer_frame, text="This tool is made by Sreeraj", font=("Helvetica", 10, "italic"), bg="#f2f2f2")
-        copyright_label.pack()
-
-    def browse_file(self):
-        file_path = filedialog.askopenfilename(title="Select Wordlist File", filetypes=[("Text Files", "*.txt")])
-        self.wordlist_entry.delete(0, tk.END)
-        self.wordlist_entry.insert(0, file_path)
-
-    def select_save_file(self):
-        file_path = filedialog.asksaveasfilename(title="Select Save File", defaultextension=".txt", filetypes=[("Text Files", "*.txt")])
-        if file_path:
-            self.save_path_entry.delete(0, tk.END)
-            self.save_path_entry.insert(0, file_path)
-    
-    def toggle_save_option(self):
-        if self.save_var.get() == 1:
-            self.save_path_entry.config(state="normal")
-            self.save_browse_button.config(state="normal")
+    def toggle_save_path(self):
+        if self.save_results.get():
+            self.save_path_entry.config(state=tk.NORMAL)
+            self.save_file_button.config(state=tk.NORMAL)  # Enable the "Select Save File" button
         else:
-            self.save_path_entry.config(state="disabled")
-            self.save_browse_button.config(state="disabled")
+            self.save_path_entry.config(state=tk.DISABLED)
+            self.save_file_button.config(state=tk.DISABLED)
+
+    def select_save_path(self):
+        filepath = filedialog.asksaveasfilename(title="Select Save File", defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+        if filepath:
+            self.save_path_entry.delete(0, tk.END)
+            self.save_path_entry.insert(0, filepath)
 
     def start_busting(self):
-        url = self.url_entry.get().strip()
-        wordlist_path = self.wordlist_entry.get().strip()
-        
-        if not url or not wordlist_path:
-            messagebox.showwarning("Warning", "Please enter a URL and select a wordlist file.")
-            return
-        
-        if self.save_var.get() == 1 and not self.save_path_entry.get().strip():
-            messagebox.showwarning("Warning", "Please select a file to save results.")
-            return
-        
-        self.stop_flag = False  # Reset stop flag
+        wordlist_path = self.wordlist_entry.get()
+        target_url = self.url_entry.get()
 
-        # Start directory busting in a separate thread
-        self.results_text.config(state="normal")
-        self.results_text.delete(1.0, tk.END)
-        self.results_text.insert(tk.END, "Starting directory buster...\n")
-        self.results_text.config(state="disabled")
-        
-        thread = Thread(target=self.bust_directories, args=(url, wordlist_path))
-        thread.start()
+        if not wordlist_path:
+            messagebox.showerror("Error", "Please select a wordlist")
+            return
+        if not target_url:
+            messagebox.showerror("Error", "Please enter a target URL")
+            return
+
+        # Change Start button color when clicked
+        self.start_button.config(bg="lightgreen")
+
+        # Start the busting process in a new thread
+        self.is_busting = True
+        self.start_button.config(state=tk.DISABLED)
+        self.stop_button.config(state=tk.NORMAL)
+        self.stop_button.config(bg="red")  # Reset Stop button color to original red
+        self.thread = threading.Thread(target=self.directory_busting, args=(target_url, wordlist_path))
+        self.thread.start()
 
     def stop_busting(self):
-        self.stop_flag = True  # Set flag to stop the busting process
+        # Change Stop button color when clicked
+        self.stop_button.config(bg="darkred")
 
-    def bust_directories(self, url, wordlist_path):
-        save_to_file = self.save_var.get() == 1
-        save_file_path = self.save_path_entry.get().strip() if save_to_file else None
+        self.is_busting = False
+        self.start_button.config(state=tk.NORMAL)
+        self.stop_button.config(state=tk.DISABLED)
+
+    def directory_busting(self, target_url, wordlist_path):
+        found_results = []
+
+        # Clear previous results
+        self.all_results_text.delete(1.0, tk.END)
+        self.found_results_text.delete(1.0, tk.END)
 
         try:
-            if save_to_file:
-                with open(save_file_path, "w") as file:
-                    file.write("Found directories:\n")
-            
             with open(wordlist_path, "r") as file:
-                directories = [line.strip() for line in file]
-                
-            for directory in directories:
-                if self.stop_flag:  # Check if stop button has been clicked
-                    break
+                for line in file:
+                    if not self.is_busting:
+                        break
 
-                full_url = f"{url}/{directory}"
-                response = requests.get(full_url)
-                
-                self.results_text.config(state="normal")
-                if response.status_code == 200:
-                    result_text = f"[FOUND] {full_url}\n"
-                    self.results_text.insert(tk.END, result_text, "url")
-                    if save_to_file:
-                        with open(save_file_path, "a") as file:
-                            file.write(result_text)
-                else:
-                    self.results_text.insert(tk.END, f"[NOT FOUND] {full_url}\n")
-                
-                self.results_text.config(state="disabled")
-                self.results_text.see(tk.END)
-        
+                    directory = line.strip()
+                    url = f"{target_url.rstrip('/')}/{directory}"
+                    self.all_results_text.insert(tk.END, f"Testing: {url}\n")
+                    self.all_results_text.see(tk.END)
+
+                    try:
+                        response = requests.get(url)
+                        if response.status_code == 200:
+                            found_results.append(url)
+                            self.found_results_text.insert(tk.END, url + "\n")
+                            self.found_results_text.tag_add(url, "end-2l", "end-1c")
+                            self.found_results_text.tag_config(url, foreground="blue", underline=1)
+                    except requests.RequestException as e:
+                        self.all_results_text.insert(tk.END, f"Error testing {url}: {e}\n")
+
+        finally:
+            # Save results if option is checked and path is provided
+            save_path = self.save_path_entry.get()
+            if self.save_results.get() and save_path and found_results:
+                try:
+                    with open(save_path, "w") as file:
+                        for result in found_results:
+                            file.write(result + "\n")
+                except Exception as e:
+                    messagebox.showerror("Error", f"Failed to save results: {e}")
+
+            self.is_busting = False
+            self.start_button.config(state=tk.NORMAL, bg="green")
+            self.stop_button.config(state=tk.DISABLED, bg="red")
+
+    def open_in_browser(self, event):
+        try:
+            index = self.found_results_text.index("@%s,%s" % (event.x, event.y))
+            url = self.found_results_text.get(f"{index} linestart", f"{index} lineend").strip()
+            if url.startswith("http"):
+                webbrowser.open(url)
+                self.found_results_text.tag_config(url, foreground="red")  # Change color to red after clicking
         except Exception as e:
-            self.results_text.config(state="normal")
-            self.results_text.insert(tk.END, f"Error: {str(e)}\n")
-            self.results_text.config(state="disabled")
+            print(f"Error opening URL: {e}")
 
-    def on_enter_url(self, event):
-        self.results_text.config(cursor="hand2")  # Show pointer cursor on hover
-
-    def on_leave_url(self, event):
-        self.results_text.config(cursor="")  # Restore default cursor
-
-    def open_url(self, event):
-        # Open the clicked URL in the browser
-        index = self.results_text.index("@%d,%d" % (event.x, event.y))
-        line_text = self.results_text.get(f"{index} linestart", f"{index} lineend").strip()
-        if line_text.startswith("[FOUND]"):
-            url = line_text.split("[FOUND] ")[1]
-            webbrowser.open(url)
-
-# Run the application
 # Run the application
 root = tk.Tk()
 app = DirectoryBuster(root)
