@@ -11,6 +11,7 @@ Directory Buster is a simple yet powerful tool for discovering hidden directorie
 ## Installation
 
 1 .Install the required dependencies:
+`In Kali Linux all the requirements are pre-installed. requirements means packages required for this tool to work.so don't need to install requirements on kali linux`
 ```bash
    pip3 install -r requirements.txt
 ```
@@ -48,6 +49,8 @@ Enter the target URL (e.g., http://example.com) in the "Target URL" input field.
 - **Select a Wordlist**:
 
 Click the "Browse" button to select a wordlist file. The wordlist file should be a .txt file containing a list of directories to test.
+`if you are using kalilinux.All the wordlists for this tool are available on kali linux at this path`
+`/usr/share/wordlists/dirbuster`
 
 - **Save Results (Optional)**:
 
