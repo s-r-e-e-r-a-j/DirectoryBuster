@@ -10,3 +10,6 @@ Directory Buster is a simple yet powerful tool for discovering hidden directorie
 - Option to stop the brute-force process anytime.
 ## Installation
 1.Clone the repository to your local machine
+```bash
+https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
+```
