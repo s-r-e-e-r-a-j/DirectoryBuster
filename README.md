@@ -13,3 +13,11 @@ Directory Buster is a simple yet powerful tool for discovering hidden directorie
 ```bash
 https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
 ```
+
+## Requirements
+- Python 3.x
+- requests (for sending HTTP requests)
+- tkinter (for the GUI)
+- threading
+- webbrowser
+  `All the requirements are pre-installed in kali linux so don't need to install this things in kali linux`
