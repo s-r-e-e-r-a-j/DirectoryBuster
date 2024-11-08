@@ -20,4 +20,6 @@ https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
 - tkinter (for the GUI)
 - threading
 - webbrowser
+
+  
   `All the requirements are pre-installed in kali linux so don't need to install this things in kali linux`
