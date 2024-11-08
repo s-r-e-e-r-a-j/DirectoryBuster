@@ -50,3 +50,30 @@ The "Found Results" section will display any discovered directories with a click
 - **Stop Directory Busting**:
 
 Click the "Stop" button anytime to halt the directory busting process.
+
+## Example Usage:
+- Enter the target URL http://example.com.
+- Choose a wordlist file (e.g., common-directories.txt).
+- Optionally select a save path for the results.
+- Click "Start" and watch the results populate in real-time.
+
+## Screenshot
+
+![VirtualBox_KALILINUX1_08_11_2024_22_00_28](https://github.com/user-attachments/assets/7f496402-1321-478b-a960-9b17f91bd82a)
+
+
+## Troubleshooting
+
+- **Error: No wordlist selected**
+Ensure that you have selected a valid wordlist file by clicking the "Browse" button.
+
+- **Error: No target URL entered**
+Enter the target URL before clicking "Start".
+
+- **Error: Cannot save results**
+Ensure that you have selected a valid file path to save the results.
+
+## License
+This tool is licensed under the MIT License. See LICENSE for more details.
+
+
