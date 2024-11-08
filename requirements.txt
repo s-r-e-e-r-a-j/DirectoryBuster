@@ -1,1 +1,4 @@
-
+tk
+requests
+threading
+webbrowser
