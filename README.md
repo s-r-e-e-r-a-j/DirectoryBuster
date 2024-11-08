@@ -9,15 +9,25 @@ Directory Buster is a simple yet powerful tool for discovering hidden directorie
 - Clickable URLs in the "Found Results" section to open them directly in a web browser.
 - Option to stop the brute-force process anytime.
 ## Installation
-1.Clone the repository to your local machine
-```bash
-https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
-```
-2.Install the required dependencies:
+
+1 .Install the required dependencies:
 ```bash
    pip3 install -r requirements.txt
 ```
-
+2. 1.Clone the repository to your local machine
+```bash
+https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
+```
+```bash
+   cd DIRECTORYBUSTER-TOOL
+```
+```bash
+   cd DIRECTORYBUSTER
+```
+3. Run the Tool:
+```bash
+  python3 directorybuster.py
+```
 ## Requirements
 - Python 3.x
 - requests (for sending HTTP requests)
