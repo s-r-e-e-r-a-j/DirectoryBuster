@@ -13,6 +13,10 @@ Directory Buster is a simple yet powerful tool for discovering hidden directorie
 ```bash
 https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
 ```
+2.Install the required dependencies:
+```bash
+   pip3 install -r requirements.txt
+```
 
 ## Requirements
 - Python 3.x
