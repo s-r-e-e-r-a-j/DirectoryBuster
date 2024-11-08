@@ -11,6 +11,8 @@ Directory Buster is a simple yet powerful tool for discovering hidden directorie
 ## Installation
 
 1 .Install the required dependencies:
+
+
 `In Kali Linux all the requirements are pre-installed. requirements means packages required for this tool to work.so don't need to install requirements on kali linux`
 ```bash
    pip3 install -r requirements.txt
