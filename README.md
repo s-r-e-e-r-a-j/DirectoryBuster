@@ -1,5 +1,5 @@
 ## Directory Buster
-Directory Buster is a simple yet powerful tool for discovering hidden directories and files on a target web server using a wordlist-based approach. It's designed to assist security professionals and enthusiasts with directory brute-forcing to identify potentially vulnerable or hidden resources on a web server.
+Directory Buster is a GUI based Tool Made with python.this is a simple yet powerful tool for discovering hidden directories and files on a target web server using a wordlist-based approach. It's designed to assist security professionals and enthusiasts with directory brute-forcing to identify potentially vulnerable or hidden resources on a web server.
 
 ## Tool Graphical User Interface
 
