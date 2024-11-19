@@ -24,7 +24,7 @@ Directory Buster is a GUI based Tool Made with python.this is a simple yet power
 ```bash
    pip3 install -r requirements.txt
 ```
-1. Clone the repository to your local machine
+2. Clone the repository to your local machine
 ```bash
 git clone https://github.com/s-r-e-e-r-a-j/DirectoryBuster.git
 ```
