@@ -26,7 +26,7 @@ Directory Buster is a GUI based Tool Made with python.this is a simple yet power
 ```
 2. 1.Clone the repository to your local machine
 ```bash
-https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
+git clone https://github.com/s-r-e-e-r-a-j/DirectoryBuster.git
 ```
 ```bash
    cd DirectoryBuster
