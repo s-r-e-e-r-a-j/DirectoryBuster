@@ -29,7 +29,7 @@ Directory Buster is a GUI based Tool Made with python.this is a simple yet power
 https://github.com/s-r-e-e-r-a-j/DIRECTORYBUSTER-TOOL.git
 ```
 ```bash
-   cd DIRECTORYBUSTER-TOOL
+   cd DirectoryBuster
 ```
 ```bash
    cd DIRECTORYBUSTER
