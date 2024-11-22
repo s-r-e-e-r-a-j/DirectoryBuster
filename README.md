@@ -95,7 +95,7 @@ Click the "Stop" button anytime to halt the directory busting process.
 
 
 
-##uninstalling
+## uninstalling
 
 ```bash
    cd DirectoryBuster
