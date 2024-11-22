@@ -34,9 +34,15 @@ git clone https://github.com/s-r-e-e-r-a-j/DirectoryBuster.git
 ```bash
    cd DIRECTORYBUSTER
 ```
-3. Run the Tool:
+3. install the tool
+  ```bash
+    sudo python3 install.py
+```
+Then enter `y` for install
+
+4. Run the Tool:
 ```bash
-  python3 directorybuster.py
+  directorybuster
 ```
 ## Requirements
 - Python 3.x
@@ -86,6 +92,21 @@ Click the "Stop" button anytime to halt the directory busting process.
 ## Picture
 
 ![VirtualBox_KALILINUX1_08_11_2024_22_00_28](https://github.com/user-attachments/assets/7f496402-1321-478b-a960-9b17f91bd82a)
+
+
+
+##uninstalling
+
+```bash
+   cd DirectoryBuster
+```
+```bash
+  cd DIRECTORYBUSTER
+```
+```bash
+  sudo python3 install.py
+```
+Then Enter `n` for uninstall
 
 
 ## Troubleshooting
