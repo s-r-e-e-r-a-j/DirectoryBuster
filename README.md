@@ -98,13 +98,13 @@ Click the "Stop" button anytime to halt the directory busting process.
 ## uninstallation
 
 ```bash
-   cd DirectoryBuster
+cd DirectoryBuster
 ```
 ```bash
-  cd DIRECTORYBUSTER
+cd DIRECTORYBUSTER
 ```
 ```bash
-  sudo python3 install.py
+sudo python3 install.py
 ```
 Then Enter `n` for uninstall
 
