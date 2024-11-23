@@ -42,7 +42,7 @@ Then enter `y` for install
 
 4. Run the Tool:
 ```bash
-  directorybuster
+directorybuster
 ```
 ## Requirements
 - Python 3.x
