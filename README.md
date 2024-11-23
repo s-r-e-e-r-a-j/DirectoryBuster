@@ -22,21 +22,21 @@ Directory Buster is a GUI based Tool Made with python.this is a simple yet power
 
 `In Kali Linux all the requirements are pre-installed. requirements means packages required for this tool to work.so don't need to install requirements on kali linux`
 ```bash
-   pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 2. Clone the repository to your local machine
 ```bash
 git clone https://github.com/s-r-e-e-r-a-j/DirectoryBuster.git
 ```
 ```bash
-   cd DirectoryBuster
+cd DirectoryBuster
 ```
 ```bash
-   cd DIRECTORYBUSTER
+cd DIRECTORYBUSTER
 ```
 3. install the tool
   ```bash
-    sudo python3 install.py
+sudo python3 install.py
 ```
 Then enter `y` for install
 
