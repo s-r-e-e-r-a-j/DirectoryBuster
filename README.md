@@ -25,7 +25,7 @@ git clone https://github.com/s-r-e-e-r-a-j/DirectoryBuster.git
 ```bash
 cd DirectoryBuster
 ```
-1
+
 2.Install the required dependencies:
 
 `In Kali Linux all the requirements are pre-installed. requirements means packages required for this tool to work.so don't need to install requirements on kali linux`
