@@ -32,10 +32,11 @@ cd DirectoryBuster
 ```bash
 pip3 install -r requirements.txt
 ```
-```bash
+
+3. install the tool
+  ```bash
 cd DIRECTORYBUSTER
 ```
-3. install the tool
   ```bash
 sudo python3 install.py
 ```
