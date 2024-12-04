@@ -18,31 +18,33 @@ Directory Buster is a GUI based Tool Made with python.this is a simple yet power
 ## Installation
 
 
-1. Clone the repository to your local machine
+1. **Clone the repository to your local machine**
 ```bash
 git clone https://github.com/s-r-e-e-r-a-j/DirectoryBuster.git
 ```
+2. **Navigate to the DirectoryBuster directory**
 ```bash
 cd DirectoryBuster
 ```
 
-2. Install the required dependencies:
+3. **Install the required dependencies:**
 
 `In Kali Linux all the requirements are pre-installed. requirements means packages required for this tool to work.so don't need to install requirements on kali linux`
 ```bash
 pip3 install -r requirements.txt
 ```
 
-3. install the tool
+4. **Navigate to the DIRECTORYBUSTER directory**
   ```bash
 cd DIRECTORYBUSTER
 ```
+5. **Install the tool**
   ```bash
 sudo python3 install.py
 ```
 Then enter `y` for install
 
-4. Run the Tool:
+6. **Run the Tool:**
 ```bash
 directorybuster
 ```
