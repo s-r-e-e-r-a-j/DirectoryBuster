@@ -1,3 +1,6 @@
+# copyright of Sreeraj,2024
+# https://github.com/s-r-e-e-r-a-j
+
 import tkinter as tk
 from tkinter import filedialog, messagebox, scrolledtext
 import requests
