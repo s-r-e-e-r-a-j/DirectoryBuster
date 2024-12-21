@@ -15,6 +15,14 @@ Directory Buster is a GUI based Tool Made with python.this is a simple yet power
 - Scrolled text boxes to display both found and non-found results.
 - Clickable URLs in the "Found Results" section to open them directly in a web browser.
 - Option to stop the brute-force process anytime.
+
+## Requirements
+- Python 3.x
+- requests (for sending HTTP requests)
+- tkinter (for the GUI)
+- threading
+- webbrowser
+  
 ## Installation
 
 
@@ -29,7 +37,6 @@ cd DirectoryBuster
 
 3. **Install the required dependencies:**
 
-`In Kali Linux all the requirements are pre-installed. requirements means packages required for this tool to work.so don't need to install requirements on kali linux`
 ```bash
 pip3 install -r requirements.txt
 ```
@@ -48,16 +55,6 @@ Then enter `y` for install
 ```bash
 directorybuster
 ```
-## Requirements
-- Python 3.x
-- requests (for sending HTTP requests)
-- tkinter (for the GUI)
-- threading
-- webbrowser
-
-  
-  `All the requirements are pre-installed in kali linux so don't need to install this things in kali linux`
-
 
  ## How to Use
  
@@ -68,8 +65,6 @@ Enter the target URL (e.g., http://example.com) in the "Target URL" input field.
 - **Select a Wordlist**:
 
 Click the "Browse" button to select a wordlist file. The wordlist file should be a .txt file containing a list of directories to test.
-`if you are using kalilinux.All the wordlists for this tool are available on kali linux at this path`
-`/usr/share/wordlists/dirbuster`
 
 - **Save Results (Optional)**:
 
