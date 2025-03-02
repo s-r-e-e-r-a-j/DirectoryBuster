@@ -113,7 +113,8 @@ directorybuster
    
 ## Picture
 
-![VirtualBox_KALILINUX1_08_11_2024_22_00_28](https://github.com/user-attachments/assets/7f496402-1321-478b-a960-9b17f91bd82a)
+
+![VirtualBox_klinux13_02_03_2025_12_56_00](https://github.com/user-attachments/assets/ffc21e2f-876e-4b05-9378-507cd19445a3)
 
 
 
