@@ -75,7 +75,7 @@ directorybuster
 
 5. **Start Scanning**  
    - Click the **"Start"** button to begin the scan.  
-    -The Tool will  Test each word in the wordlist **without extensions**.
+   - The Tool will  Test each word in the wordlist **without extensions**.
    - The Tool will Test each word in the wordlist **with each extension** (if added).
    - Show the results in real-time.
 
