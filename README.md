@@ -64,7 +64,7 @@ directorybuster
    - Example: `https://example.com`
 
 2. **Select a Wordlist**  
-   - Click the **"Browse"** button and choose a `.txt` file containing directory names or path parameter names.
+   - Click the **"Browse"** button and choose a `.txt` file containing directory names
 
 3. **(Optional) Add File Extensions**  
    - Example: `.php,.html,.js` (comma-separated).
