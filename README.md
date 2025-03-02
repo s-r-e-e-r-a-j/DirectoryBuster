@@ -6,16 +6,17 @@ DirectoryBuster is a GUI-based directory brute-forcing tool that helps discover 
 
 ## Features  
 
-- **Easy-to-Use Interface** – Simple and user-friendly GUI.  
-- **Custom Wordlist** – Choose your own wordlist for scanning.  
-- **Supports File Extensions** – Check for files with extensions like `.php, .html, .js`.  
--  **Save Results** – Option to save founded results to a file.  
--  **Clickable Links** – Open found URLs directly in a browser.  
--  **Live Updates** – See the scanning progress in real-time.  
--  **Fast Scanning** – Uses multi-threading for better performance.  
--  **Start & Stop Anytime** – Control the scan with start and stop buttons.  
--  **Error Handling** – Handles network issues without crashing.
-- 
+- **Easy-to-Use Interface**:  Simple and user-friendly GUI.  
+- **Custom Wordlist**:
+  Choose your own wordlist for scanning.  
+- **Supports File Extensions**: Check for files with extensions like `.php, .html, .js`.  
+-  **Save Results**: Option to save founded results to a file.  
+-  **Clickable Links**: Open found URLs directly in a browser.  
+-  **Live Updates**:See the scanning progress in real-time.  
+-  **Fast Scanning**:Uses multi-threading for better performance.  
+-  **Start & Stop Anytime**: Control the scan with start and stop buttons.  
+-  **Error Handling**:Handles network issues without crashing.
+  
 ---
 
 ## Requirements
