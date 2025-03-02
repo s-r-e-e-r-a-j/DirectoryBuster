@@ -75,7 +75,9 @@ directorybuster
 
 5. **Start Scanning**  
    - Click the **"Start"** button to begin the scan.  
-   - The tool will test each directory and display the results.
+    - Test each word in the wordlist **without extensions**.
+   - Test each word in the wordlist **with each extension** (if added).
+   - Show the results in real-time.
 
 6. **Open Found Links**  
    - Click on any found URL to open it in your default browser.
