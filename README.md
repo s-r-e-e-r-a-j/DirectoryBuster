@@ -82,7 +82,7 @@ directorybuster
 
 7. **Stop Scanning**  
    - Click the **"Stop"** button to cancel the scan at any time.
-   - 
+     
 
   
 ## Example Usage
