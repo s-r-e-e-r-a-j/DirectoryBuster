@@ -61,7 +61,7 @@ directorybuster
 ## How to Use  
 
 1. **Enter Target URL**  
-   - Example: `http://example.com`
+   - Example: `https://example.com`
 
 2. **Select a Wordlist**  
    - Click the **"Browse"** button and choose a `.txt` file containing directory names or path parameter names.
@@ -89,7 +89,7 @@ directorybuster
 ## Example Usage
 
 1. **Enter the Target URL**:  
-   Type the website URL you want to scan, for example: `http://example.com`.
+   Type the website URL you want to scan, for example: `https://example.com`.
 
 2. **Choose a Wordlist File**:  
    Click the "Browse" button and select a wordlist file (e.g., `common-pathparameters.txt`).
