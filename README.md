@@ -8,8 +8,8 @@
 
 - **Target URL Input**: Enter the target URL to scan for hidden directories and files.
 - **Wordlist Support**: Load a custom wordlist file containing directory and file names to test.
-- **Extension Support**: Test directories with user-provided extensions (e.g., `.js`, `.php`, `.html`).
-- **Real-Time Results**: View all tested URLs and discovered directories in real-time.
+- **Extension Support**: Test with user-provided extensions (e.g., `.js`, `.php`, `.html`).
+- **Real-Time Results**: View all tested URLs and discovered results in real-time.
 - **Clickable URLs**: Found URLs are clickable and open directly in your default web browser.
 - **Save Results**: Optionally save the discovered directories to a file.
 - **Start/Stop Control**: Start or stop the scanning process at any time.
