@@ -59,36 +59,32 @@ Then enter `y` for install
 directorybuster
 ```
 
- ## How to Use
+## How to Use  
 
-### **Set the Target URL**
-Type the website URL you want to scan (e.g., `http://example.com`) in the "Target URL" box.
+1. **Enter Target URL**  
+   - Example: `http://example.com`
 
-### **Select a Wordlist**
-Click the "Browse" button to choose a wordlist file. The wordlist should be a `.txt` file with a list of directory names to test (e.g., `common-directories.txt`).
+2. **Select a Wordlist**  
+   - Click the **"Browse"** button and choose a `.txt` file containing directory names.
 
-### **Add Extensions (Optional)**
-If you want to test specific file types, type the extensions separated by commas (e.g., `.js,.php,.html`). The tool will check:
-- Each word **without extensions** (e.g., `http://example.com/admin`).
-- Each word **with each extension** (e.g., `http://example.com/admin.js`, `http://example.com/admin.php`).
+3. **(Optional) Add File Extensions**  
+   - Example: `.php,.html,.js` (comma-separated).
 
-### **Save Results (Optional)**
-If you want to save the results:
-1. Check the "Save found results" box.
-2. Click "Select Save File" to choose where to save the results.
+4. **(Optional) Enable Save Results**  
+   - Check the **"Save found results"** box and select a file to save the output.
 
-### **Start Scanning**
-Click the "Start" button to begin scanning. The tool will:
-- Test each word in the wordlist **without extensions**.
-- Test each word in the wordlist **with each extension** (if added).
-- Show the results in real-time.
+5. **Start Scanning**  
+   - Click the **"Start"** button to begin the scan.  
+   - The tool will test each directory and display the results.
 
-### **Found Results**
-Founded results will appear in the "Found Results" section. Click on any URL to open it in your browser. Found URLs are shown in **blue** and turn **red** after clicking.
+6. **Open Found Links**  
+   - Click on any found URL to open it in your default browser.
 
-### **Stop Scanning**
-Click the "Stop" button anytime to stop the scanning process.
+7. **Stop Scanning**  
+   - Click the **"Stop"** button to cancel the scan at any time.
+   - 
 
+  
 ## Example Usage
 
 1. **Enter the Target URL**:  
