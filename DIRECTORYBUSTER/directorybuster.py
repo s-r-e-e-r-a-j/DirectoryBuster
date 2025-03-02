@@ -14,7 +14,7 @@ class DirectoryBuster:
         
         # Center the window on the screen with adjusted height
         window_width = 600
-        window_height = 680  # Increased window height to accommodate buttons
+        window_height = 720  # Increased window height to accommodate the new input field
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
         x = int((screen_width - window_width) / 2)
@@ -46,6 +46,13 @@ class DirectoryBuster:
         self.wordlist_entry = tk.Entry(wordlist_frame, width=40)
         self.wordlist_entry.grid(row=0, column=1, padx=5)
         tk.Button(wordlist_frame, text="Browse", command=self.select_wordlist).grid(row=0, column=2, padx=5)
+
+        # Frame for Extensions Input
+        extensions_frame = tk.Frame(self.root)
+        extensions_frame.pack(pady=10, fill=tk.X, padx=20)
+        tk.Label(extensions_frame, text="Extensions (e.g., .js,.php,.html):", font=label_font).grid(row=0, column=0, sticky=tk.W)
+        self.extensions_entry = tk.Entry(extensions_frame, width=50)
+        self.extensions_entry.grid(row=0, column=1, padx=5)
 
         # Save Results Option
         options_frame = tk.Frame(self.root)
@@ -113,6 +120,7 @@ class DirectoryBuster:
     def start_busting(self):
         wordlist_path = self.wordlist_entry.get()
         target_url = self.url_entry.get()
+        extensions = self.extensions_entry.get().strip()
 
         if not wordlist_path:
             messagebox.showerror("Error", "Please select a wordlist")
@@ -129,7 +137,7 @@ class DirectoryBuster:
         self.start_button.config(state=tk.DISABLED)
         self.stop_button.config(state=tk.NORMAL)
         self.stop_button.config(bg="red")  # Reset Stop button color to original red
-        self.thread = threading.Thread(target=self.directory_busting, args=(target_url, wordlist_path))
+        self.thread = threading.Thread(target=self.directory_busting, args=(target_url, wordlist_path, extensions))
         self.thread.start()
 
     def stop_busting(self):
@@ -140,7 +148,7 @@ class DirectoryBuster:
         self.start_button.config(state=tk.NORMAL)
         self.stop_button.config(state=tk.DISABLED)
 
-    def directory_busting(self, target_url, wordlist_path):
+    def directory_busting(self, target_url, wordlist_path, extensions):
         found_results = []
 
         # Clear previous results
@@ -154,19 +162,17 @@ class DirectoryBuster:
                         break
 
                     directory = line.strip()
-                    url = f"{target_url.rstrip('/')}/{directory}"
-                    self.all_results_text.insert(tk.END, f"Testing: {url}\n")
-                    self.all_results_text.see(tk.END)
 
-                    try:
-                        response = requests.get(url)
-                        if response.status_code == 200:
-                            found_results.append(url)
-                            self.found_results_text.insert(tk.END, url + "\n")
-                            self.found_results_text.tag_add(url, "end-2l", "end-1c")
-                            self.found_results_text.tag_config(url, foreground="blue", underline=1)
-                    except requests.RequestException as e:
-                        self.all_results_text.insert(tk.END, f"Error testing {url}: {e}\n")
+                    # Test without any extension
+                    url_without_extension = f"{target_url.rstrip('/')}/{directory}"
+                    self.test_url(url_without_extension, found_results)
+
+                    # Test with each extension if provided
+                    if extensions:
+                        for ext in extensions.split(","):
+                            ext = ext.strip()  # Remove any extra spaces
+                            url_with_extension = f"{target_url.rstrip('/')}/{directory}{ext}"
+                            self.test_url(url_with_extension, found_results)
 
         finally:
             # Save results if option is checked and path is provided
@@ -182,6 +188,20 @@ class DirectoryBuster:
             self.is_busting = False
             self.start_button.config(state=tk.NORMAL, bg="green")
             self.stop_button.config(state=tk.DISABLED, bg="red")
+
+    def test_url(self, url, found_results):
+        self.all_results_text.insert(tk.END, f"Testing: {url}\n")
+        self.all_results_text.see(tk.END)
+
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                found_results.append(url)
+                self.found_results_text.insert(tk.END, url + "\n")
+                self.found_results_text.tag_add(url, "end-2l", "end-1c")
+                self.found_results_text.tag_config(url, foreground="blue", underline=1)
+        except requests.RequestException as e:
+            self.all_results_text.insert(tk.END, f"Error testing {url}: {e}\n")
 
     def open_in_browser(self, event):
         try:
