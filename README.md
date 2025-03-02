@@ -92,7 +92,7 @@ directorybuster
    Type the website URL you want to scan, for example: `https://example.com`.
 
 2. **Choose a Wordlist File**:  
-   Click the "Browse" button and select a wordlist file (e.g., `common-pathparameters.txt`).
+   Click the "Browse" button and select a wordlist file (e.g., `common-directories.txt`).
 
 3. **Add Extensions (Optional)**:  
    If you want to test specific file types, type the extensions separated by commas (e.g., `.js,.php,.html`).
