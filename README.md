@@ -1,6 +1,5 @@
 ## DirectoryBuster
-
-DirectoryBuster is a GUI-based directory brute-forcing tool that helps discover hidden directories and files on web servers. It allows penetration testers and security researchers to identify accessible resources by testing a given target URL against a wordlist of potential directory and file names.
+DirectoryBuster is a GUI-based directory brute-forcing tool designed to help penetration testers and security researchers discover hidden directories, path parameters, and files on web servers. By testing a target URL against a wordlist of potential directory and file names, it identifies accessible resources that may pose security risks.
 
 ---
 
