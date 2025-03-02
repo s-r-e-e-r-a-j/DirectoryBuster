@@ -11,7 +11,7 @@
 - **Extension Support**: Test with user-provided extensions (e.g., `.js`, `.php`, `.html`).
 - **Real-Time Results**: View all tested URLs and discovered results in real-time.
 - **Clickable URLs**: Found URLs are clickable and open directly in your default web browser.
-- **Save Results**: Optionally save the discovered directories to a file.
+- **Save Results**: Optionally save the discovered results to a file.
 - **Start/Stop Control**: Start or stop the scanning process at any time.
 - **Color-Coded UI**:
   - Found URLs are highlighted in **blue** and change to **red** after being clicked.
