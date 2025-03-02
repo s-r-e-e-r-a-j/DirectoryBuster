@@ -1,22 +1,21 @@
-# Directory Buster
+## DirectoryBuster
 
-**Directory Buster** is a powerful and user-friendly tool designed to discover hidden directories and files on a web server by brute-forcing common directory and file names. It is written in Python and uses a graphical user interface (GUI) built with `tkinter`. The tool supports testing directories with and without user-provided extensions, saving results, and opening discovered URLs directly in your browser.
+DirectoryBuster is a GUI-based directory brute-forcing tool that helps discover hidden directories and files on web servers. It allows penetration testers and security researchers to identify accessible resources by testing a given target URL against a wordlist of potential directory and file names.
 
 ---
 
-## Features
+## Features  
 
-- **Target URL Input**: Enter the target URL to scan for hidden directories and files.
-- **Wordlist Support**: Load a custom wordlist file containing directory and file names to test.
-- **Extension Support**: Test with user-provided extensions (e.g., `.js`, `.php`, `.html`).
-- **Real-Time Results**: View all tested URLs and discovered results in real-time.
-- **Clickable URLs**: Found URLs are clickable and open directly in your default web browser.
-- **Save Results**: Optionally save the discovered results to a file.
-- **Start/Stop Control**: Start or stop the scanning process at any time.
-- **Color-Coded UI**:
-  - Found URLs are highlighted in **blue** and change to **red** after being clicked.
-  - Buttons change color to indicate their state (e.g., Start button turns **light green** when active).
-
+- **Easy-to-Use Interface** – Simple and user-friendly GUI.  
+- **Custom Wordlist** – Choose your own wordlist for scanning.  
+- **Supports File Extensions** – Check for files with extensions like `.php, .html, .js`.  
+-  **Save Results** – Option to save founded results to a file.  
+-  **Clickable Links** – Open found URLs directly in a browser.  
+-  **Live Updates** – See the scanning progress in real-time.  
+-  **Fast Scanning** – Uses multi-threading for better performance.  
+-  **Start & Stop Anytime** – Control the scan with start and stop buttons.  
+-  **Error Handling** – Handles network issues without crashing.
+- 
 ---
 
 ## Requirements
