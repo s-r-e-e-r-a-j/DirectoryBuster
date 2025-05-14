@@ -98,20 +98,20 @@ directorybuster
 3. **Add Extensions (Optional)**:  
    If you want to test specific file types, type the extensions separated by commas (e.g., `.js,.php,.html`).
 4. **choose Threads(optional)**:
-     choose threads by sliding the slide bar default is 10 max threads is 50
-5. **Save Results (Optional)**:  
+   choose threads by sliding the slide bar default is 10 max threads is 50
+6. **Save Results (Optional)**:  
    Check the "Save found results" box and click "Select Save File" to choose where to save the results.
 
-6. **Start Scanning**:  
+7. **Start Scanning**:  
    Click the "Start" button. The tool will:
    - Test each word in the wordlist **without extensions**.
    - Test each word in the wordlist **with each extension** (if added).
    - Show the results in real-time.
 
-7. **View Found Results**:  
+8. **View Found Results**:  
    Founded results will appear in the "Found Results" section. Click on any URL to open it in your browser.
 
-8. **Stop Scanning**:  
+9. **Stop Scanning**:  
    Click the "Stop" button anytime to stop the scanning process.
    
 ## Picture
