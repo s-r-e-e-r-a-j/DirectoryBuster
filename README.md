@@ -97,9 +97,8 @@ directorybuster
 
 3. **Add Extensions (Optional)**:  
    If you want to test specific file types, type the extensions separated by commas (e.g., `.js,.php,.html`).
-4. **choose Threads(optional)**:
-   
-   choose threads by sliding the slide bar default is 10 max threads is 50
+4. **Choose Threads(optional)**:
+   Choose threads by sliding the slide bar default is 10 max threads is 50
 6. **Save Results (Optional)**:  
    Check the "Save found results" box and click "Select Save File" to choose where to save the results.
 
