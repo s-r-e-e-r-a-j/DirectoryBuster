@@ -252,7 +252,7 @@ class DirectoryBuster:
         try:
             headers = {"User-Agent": random.choice(self.user_agents)}
             response = requests.get(url, headers=headers, timeout=15)
-            if response.status_code == 200:
+            if response.status_code in [200,301,302]:
                 found_results.append(url)
                 self.found_results_text.insert(tk.END, url + "\n")
                 self.found_results_text.tag_add(url, "end-2l", "end-1c")
