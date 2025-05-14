@@ -115,7 +115,8 @@ directorybuster
 ## Picture
 
 
-![VirtualBox_klinux13_02_03_2025_12_56_00](https://github.com/user-attachments/assets/ffc21e2f-876e-4b05-9378-507cd19445a3)
+![VirtualBox_klinux17_15_05_2025_01_20_26](https://github.com/user-attachments/assets/02ce28a4-16a1-4f35-8be2-49fe2d39a07e)
+
 
 
 
