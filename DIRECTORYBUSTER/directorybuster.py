@@ -1,4 +1,4 @@
-# copyright © Sreeraj, 2024
+# Developer: Sreeraj
 # https://github.com/s-r-e-e-r-a-j
 
 import tkinter as tk
@@ -6,16 +6,20 @@ from tkinter import filedialog, messagebox, scrolledtext
 import requests
 import threading
 import webbrowser
-import random  # Import the random module for selecting a random user-agent
+import random
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class DirectoryBuster:
     def __init__(self, root):
         self.root = root
         self.root.title("Directory Buster")
         
+        # Set up proper shutdown handling
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
+        
         # Center the window on the screen with adjusted height
         window_width = 600
-        window_height = 720  # Increased window height to accommodate the new input field
+        window_height = 770
         screen_width = root.winfo_screenwidth()
         screen_height = root.winfo_screenheight()
         x = int((screen_width - window_width) / 2)
@@ -55,6 +59,14 @@ class DirectoryBuster:
         self.extensions_entry = tk.Entry(extensions_frame, width=50)
         self.extensions_entry.grid(row=0, column=1, padx=5)
 
+        # Frame for Threads Option
+        threads_frame = tk.Frame(self.root)
+        threads_frame.pack(pady=5, fill=tk.X, padx=20)
+        tk.Label(threads_frame, text="Threads:", font=label_font).grid(row=0, column=0, sticky=tk.W)
+        self.threads_slider = tk.Scale(threads_frame, from_=1, to=50, orient=tk.HORIZONTAL)
+        self.threads_slider.set(10)
+        self.threads_slider.grid(row=0, column=1, sticky=tk.W, padx=5)
+
         # Save Results Option
         options_frame = tk.Frame(self.root)
         options_frame.pack(pady=5, fill=tk.X, padx=20)
@@ -87,7 +99,6 @@ class DirectoryBuster:
         buttons_frame = tk.Frame(self.root)
         buttons_frame.pack(pady=20)
 
-        # Adjusting button size and layout
         self.start_button = tk.Button(buttons_frame, text="Start", command=self.start_busting, bg="green", fg="white", width=15, height=2)
         self.start_button.grid(row=0, column=0, padx=20)
 
@@ -97,6 +108,7 @@ class DirectoryBuster:
         # Thread management variables
         self.is_busting = False
         self.thread = None
+        self.executor = None
 
         # List of user agents
         self.user_agents = [
@@ -112,6 +124,11 @@ class DirectoryBuster:
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Brave/91.0.4472.124 Safari/537.36"
         ]
 
+    def on_close(self):
+        """Handle window close event"""
+        self.stop_busting()
+        self.root.destroy()
+
     def select_wordlist(self):
         filepath = filedialog.askopenfilename(title="Select Wordlist", filetypes=[("Text files", "*.txt")])
         if filepath:
@@ -121,7 +138,7 @@ class DirectoryBuster:
     def toggle_save_path(self):
         if self.save_results.get():
             self.save_path_entry.config(state=tk.NORMAL)
-            self.save_file_button.config(state=tk.NORMAL)  # Enable the "Select Save File" button
+            self.save_file_button.config(state=tk.NORMAL)
         else:
             self.save_path_entry.config(state=tk.DISABLED)
             self.save_file_button.config(state=tk.DISABLED)
@@ -144,51 +161,72 @@ class DirectoryBuster:
             messagebox.showerror("Error", "Please enter a target URL")
             return
 
-        # Change Start button color when clicked
         self.start_button.config(bg="lightgreen")
-
-        # Start the busting process in a new thread
         self.is_busting = True
         self.start_button.config(state=tk.DISABLED)
         self.stop_button.config(state=tk.NORMAL)
-        self.stop_button.config(bg="red")  # Reset Stop button color to original red
+        self.stop_button.config(bg="red")
+        
         self.thread = threading.Thread(target=self.directory_busting, args=(target_url, wordlist_path, extensions))
+        self.thread.daemon = True  # Make the thread a daemon so it exits when main thread exits
         self.thread.start()
 
     def stop_busting(self):
-        # Change Stop button color when clicked
+        """Stop all running threads and cleanup"""
         self.stop_button.config(bg="darkred")
-
         self.is_busting = False
+        
+        # Shutdown the executor if it exists
+        if self.executor:
+            self.executor.shutdown(wait=False)
+            self.executor = None
+            
+        # Reset UI
         self.start_button.config(state=tk.NORMAL)
         self.stop_button.config(state=tk.DISABLED)
 
     def directory_busting(self, target_url, wordlist_path, extensions):
         found_results = []
-
-        # Clear previous results
         self.all_results_text.delete(1.0, tk.END)
         self.found_results_text.delete(1.0, tk.END)
 
         try:
             with open(wordlist_path, "r") as file:
-                for line in file:
+                directories = [line.strip() for line in file if line.strip()]
+
+            # Create a ThreadPoolExecutor with the selected number of threads
+            with ThreadPoolExecutor(max_workers=self.threads_slider.get()) as executor:
+                self.executor = executor
+                futures = []
+
+                for directory in directories:
                     if not self.is_busting:
                         break
 
-                    directory = line.strip()
-
-                    # Test without any extension
+                    # Submit tasks for testing without extension
                     url_without_extension = f"{target_url.rstrip('/')}/{directory}"
-                    self.test_url(url_without_extension, found_results)
+                    futures.append(executor.submit(self.test_url_worker, url_without_extension, found_results))
 
-                    # Test with each extension if provided
+                    # Submit tasks for testing with each extension if provided
                     if extensions:
                         for ext in extensions.split(","):
-                            ext = ext.strip()  # Remove any extra spaces
+                            ext = ext.strip()
+                            if not ext:
+                                continue
                             url_with_extension = f"{target_url.rstrip('/')}/{directory}{ext}"
-                            self.test_url(url_with_extension, found_results)
+                            futures.append(executor.submit(self.test_url_worker, url_with_extension, found_results))
 
+                # Wait for all tasks to complete
+                for future in as_completed(futures):
+                    if not self.is_busting:
+                        break
+                    try:
+                        future.result()
+                    except Exception as e:
+                        self.all_results_text.insert(tk.END, f"Error in worker thread: {e}\n")
+
+        except Exception as e:
+            self.all_results_text.insert(tk.END, f"Error: {e}\n")
         finally:
             # Save results if option is checked and path is provided
             save_path = self.save_path_entry.get()
@@ -204,14 +242,16 @@ class DirectoryBuster:
             self.start_button.config(state=tk.NORMAL, bg="green")
             self.stop_button.config(state=tk.DISABLED, bg="red")
 
-    def test_url(self, url, found_results):
+    def test_url_worker(self, url, found_results):
+        if not self.is_busting:
+            return
+
         self.all_results_text.insert(tk.END, f"Testing: {url}\n")
         self.all_results_text.see(tk.END)
 
         try:
-            # Randomly select a user-agent from the list
             headers = {"User-Agent": random.choice(self.user_agents)}
-            response = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers, timeout=15)
             if response.status_code == 200:
                 found_results.append(url)
                 self.found_results_text.insert(tk.END, url + "\n")
@@ -226,7 +266,7 @@ class DirectoryBuster:
             url = self.found_results_text.get(f"{index} linestart", f"{index} lineend").strip()
             if url.startswith("http"):
                 webbrowser.open(url)
-                self.found_results_text.tag_config(url, foreground="red")  # Change color to red after clicking
+                self.found_results_text.tag_config(url, foreground="red")
         except Exception as e:
             print(f"Error opening URL: {e}")
 
