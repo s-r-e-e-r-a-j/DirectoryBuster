@@ -64,7 +64,7 @@ class DirectoryBuster:
         threads_frame.pack(pady=5, fill=tk.X, padx=20)
         tk.Label(threads_frame, text="Threads:", font=label_font).grid(row=0, column=0, sticky=tk.W)
         self.threads_slider = tk.Scale(threads_frame, from_=1, to=50, orient=tk.HORIZONTAL)
-        self.threads_slider.set(10)
+        self.threads_slider.set(3)
         self.threads_slider.grid(row=0, column=1, sticky=tk.W, padx=5)
 
         # Save Results Option
